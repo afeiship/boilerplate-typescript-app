@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('nx.widget').constant('pullToRefreshConfig', {
+  angular.module('nx.widget').constant('nxPullToRefreshConfig', {
     treshold: 60,
     debounce: 400,
     text: {

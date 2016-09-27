@@ -8,7 +8,7 @@
 (function() {
   'use strict';
 
-  angular.module('nx.widget').constant('pullToRefreshConfig', {
+  angular.module('nx.widget').constant('nxPullToRefreshConfig', {
     treshold: 60,
     debounce: 400,
     text: {
@@ -29,7 +29,7 @@
   'use strict';
 
   angular.module('nx.widget')
-    .directive('pullToRefresh', function($compile, $timeout, $q, pullToRefreshConfig) {
+    .directive('nxPullToRefresh', function($compile, $timeout, $q, pullToRefreshConfig) {
       return {
         scope: true,
         restrict: 'A',
@@ -43,7 +43,7 @@
 
           return function postLink(scope, iElement, iAttrs) {
 
-            var config = angular.extend({}, pullToRefreshConfig, iAttrs);
+            var config = angular.extend({}, nxPullToRefreshConfig, iAttrs);
             var scrollElement = iElement.parent();
             var ptrElement = window.ptr = iElement.children()[0];
 
