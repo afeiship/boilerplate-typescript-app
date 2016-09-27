@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('nx.widget')
-    .directive('nxPullToRefresh', function($compile, $timeout, $q, pullToRefreshConfig) {
+    .directive('nxPullToRefresh', function($compile, $timeout, $q, nxPullToRefreshConfig) {
       return {
         scope: true,
         restrict: 'A',
