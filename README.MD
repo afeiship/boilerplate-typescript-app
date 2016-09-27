@@ -1,5 +1,6 @@
 #angular-pull-to-refresh
-A simple css-only pull-to-refresh component leveraging native style momentum scrolling -webkit-overflow-scroll: touch.
+
+CSS3 Pull-to-Refresh directive for AngularJS
 
 ##usage:
 + bower install `afeiship/angular-pull-to-refresh --save`

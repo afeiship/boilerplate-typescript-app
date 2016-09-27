@@ -1,6 +1,6 @@
 {
   "name": "angular-pull-to-refresh",
-  "description": "A simple css-only pull-to-refresh component leveraging native style momentum scrolling -webkit-overflow-scroll: touch.",
+  "description": "CSS3 Pull-to-Refresh directive for AngularJS",
   "main": [
     "dist/css/pull-to-refresh.css",
     "dist/js/angular-pull-to-refresh.js"
