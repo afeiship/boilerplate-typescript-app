@@ -2,20 +2,20 @@
 .nx-widget-pull-to-refresh {
   // Vars
   //
-  @height: 40px;
+  $height: 40px;
   // Styles
   position: relative;
   display: block;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: -@height auto 0;
+  margin: -#{$height} auto 0;
   padding: 0;
   width: 100%;
-  height: @height;
+  height:  #{$height};
   border-bottom: 1px dashed #ccc;
   text-align: center;
-  line-height: @height;
+  line-height: #{$height};
   -webkit-transition-duration: 400ms;
   -moz-transition-duration: 400ms;
   transition-duration: 400ms;
