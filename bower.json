@@ -1,0 +1,29 @@
+{
+  "name": "angular-pull-to-refresh",
+  "description": "A simple css-only pull-to-refresh component leveraging native style momentum scrolling -webkit-overflow-scroll: touch.",
+  "main": [
+    "dist/css/pull-to-refresh.css",
+    "dist/js/angular-pull-to-refresh.js"
+  ],
+  "authors": [
+    "afei"
+  ],
+  "license": "MIT",
+  "keywords": ["angular","pull-to-refresh","refresher"],
+  "homepage": "https://github.com/afeiship/angular-pull-to-refresh",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ],
+  "dependencies": {
+    "angular": "*",
+    "angular-module-stiffener": "afeiship/angular-module-stiffener"
+  }
+}
