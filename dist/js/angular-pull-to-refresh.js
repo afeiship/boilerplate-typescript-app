@@ -76,7 +76,7 @@
               setStatus('loading');
 
               var start = +new Date();
-              $q.when(scope.$eval(iAttrs.pullToRefresh))
+              $q.when(scope.$eval(iAttrs.nxPullToRefresh))
                 .then(function() {
                   var elapsed = +new Date() - start;
                   $timeout(function() {
