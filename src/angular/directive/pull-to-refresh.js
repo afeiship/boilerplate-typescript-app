@@ -7,7 +7,7 @@
         scope: true,
         restrict: 'A',
         transclude: true,
-        templateUrl: '<div class="nx-widget-pull-to-refresh">' +
+        template: '<div class="nx-widget-pull-to-refresh">' +
           '<i ng-class="icon[status]"></i>&nbsp;' +
           '<span ng-bind="text[status]"></span>' +
           '</div>' +
