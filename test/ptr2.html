@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta content="email=no" name="format-detection">
+  <title>pullToRefresh</title>
+
+  <style>
+    html,
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .list {
+      box-sizing: border-box;
+      position: relative;
+      background-color: #ccc;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .list>li {
+      width: 80%;
+      height: 30px;
+      line-height: 30px;
+      margin: 10px auto 0;
+      border-radius: 4px;
+      background-color: #428bca;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="list" id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+    <li>16</li>
+    <li>17</li>
+    <li>18</li>
+    <li>19</li>
+    <li>20</li>
+  </ul>
+  <!-- javascript -->
+  <script src="./ptr.js"></script>
+  <script>
+    var current_page = 1,
+      max_page = 5;
+
+    // refresh
+    var refresh = new PullToRefresh().init({
+      onRefresh: onRefresh,
+      max_page: max_page
+    });
+
+    function onRefresh() {
+      var i,
+        html = [];
+      current_page++;
+      for (i = 1; i <= 20; i++) {
+        html.push('<li>' + ((current_page - 1) * 20 + i) + '</li>');
+      }
+      document.querySelector('#list').innerHTML += html.join('');
+      return true;
+    }
+  </script>
+</body>
+
+</html>
