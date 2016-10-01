@@ -19,6 +19,22 @@
 </head>
 <body ng-controller="MainCtrl as vm" ng-cloak>
 
+<div class="container" nx-pull-to-refresh="vm.doRefresh()">
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+  <div class="item">item1</div>
+</div>
 
 
 
@@ -29,6 +45,11 @@
   var TestModule = angular.module('TestApp', ['nx.widget'])
     .controller('MainCtrl', function ($scope) {
       var vm = this;
+      vm.doRefresh=doRefresh;
+
+      function doRefresh() {
+        consoel.log('do refresh!!!');
+      }
       //You directive demo code goes here!
     });
 </script>
