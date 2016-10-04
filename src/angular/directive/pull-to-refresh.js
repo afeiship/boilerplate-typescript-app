@@ -47,11 +47,11 @@
             });
 
 
-            iElement.bind('touchmove', function(inEvent) {
+            iElement.bind('touchmove', function(ev) {
               if (scrollElement[0].scrollTop <= 0 && draging) {
-                end = inEvent.touches[0].pageY;
+                end = even.touches[0].pageY;
                 if (start < end) {
-                  inEvent.preventDefault();
+                  even.preventDefault();
                   setTranslition(0);
                   translate(end - start - offset);
                 }
@@ -68,7 +68,6 @@
                     callback();
                   }
                 } else {
-                  console.log('reset!!!');
                   reset();
                 }
               }
@@ -89,6 +88,7 @@
 
             function reset() {
               translate(0 - offset);
+              //标识操作完成
               lock = false;
             }
 
