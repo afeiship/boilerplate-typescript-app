@@ -26,9 +26,8 @@
 })();
 
 (function() {
+
   'use strict';
-
-
 
   angular.module('nx.widget')
     .directive('nxPullToRefresh', function($compile, $timeout, $q, nxPullToRefreshConfig) {
@@ -56,29 +55,27 @@
             scope.text = config.text;
             scope.icon = config.icon;
             scope.status = 'pull';
-
-            var setStatus = function(status) {
-              shouldReload = status === 'release';
-              scope.$apply(function() {
-                scope.status = status;
-              });
-            };
-
-            var shouldReload = false;
-
             iElement.bind('touchstart', function(inEvent) {
-              lock = true;
-              draging = true;
-              start = inEvent.touches[0].pageY;
-              setTranslition(0);
+              if (scrollElement[0].scrollTop <= 0 && !lock) {
+                lock = true;
+                draging = true;
+                start = inEvent.touches[0].pageY;
+                setTranslition(0);
+
+                console.log('start!!!');
+              }
             });
 
 
-            iElement.bind('touchmove', function(ev) {
-              if (scrollElement[0].scrollTop <= 0 && draging) {
-                end = even.touches[0].pageY;
+            iElement.bind('touchmove', function(inEvent) {
+
+              console.log('touch move!!!');
+              console.log(scrollElement[0].scrollTop);
+              if (draging) {
+                end = inEvent.touches[0].pageY;
+                console.log('end!!!', end);
                 if (start < end) {
-                  even.preventDefault();
+                  inEvent.preventDefault();
                   setTranslition(0);
                   translate(end - start - offset);
                 }
@@ -86,6 +83,7 @@
             });
 
             iElement.bind('touchend', function(inEvent) {
+              console.log('touch end!!!');
               if (draging) {
                 draging = false;
                 if (end - start >= offset) {
@@ -115,7 +113,6 @@
 
             function reset() {
               translate(0 - offset);
-              //标识操作完成
               lock = false;
             }
 
