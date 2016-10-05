@@ -44,7 +44,7 @@
 
               console.log('touch move!!!');
               console.log(scrollElement[0].scrollTop);
-              if (draging) {
+              if (scrollElement[0].scrollTop <= 0 && draging) {
                 end = inEvent.touches[0].pageY;
                 console.log('end!!!', end);
                 if (start < end) {
