@@ -24,34 +24,28 @@
             var offset = config.treshold;
             var callback = scope.$eval(iAttrs.pullToRefresh);
 
+console.log(iElement);
             // Initialize isolated scope vars
             scope.text = config.text;
             scope.icon = config.icon;
             scope.status = 'pull';
             iElement.bind('touchstart', function(inEvent) {
-              if (scrollElement[0].scrollTop <= 0 && !lock) {
+              if (iElement[0].scrollTop <= 0 && !lock) {
                 lock = true;
                 draging = true;
                 start = inEvent.touches[0].pageY;
                 setTranslition(0);
-
-                console.log('start!!!');
               }
             });
 
 
             iElement.bind('touchmove', function(inEvent) {
-
-              console.log('touch move!!!');
-              console.log(scrollElement[0].scrollTop);
-              if (scrollElement[0].scrollTop <= 0 && draging) {
+              console.log(iElement[0].scrollTop);
+              if (draging) {
                 end = inEvent.touches[0].pageY;
-                console.log('end!!!', end);
-                if (start < end) {
-                  inEvent.preventDefault();
-                  setTranslition(0);
-                  translate(end - start - offset);
-                }
+                inEvent.preventDefault();
+                setTranslition(0);
+                translate(end - start - offset);
               }
             });
 
