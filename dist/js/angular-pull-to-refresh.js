@@ -50,6 +50,7 @@
             var ptrElement = window.ptr = iElement.children()[0];
             var offset = config.treshold;
             var callback = scope.$eval(iAttrs.pullToRefresh);
+            var bodyElement= angular.element(document.body);
 
 console.log(iElement);
             // Initialize isolated scope vars
@@ -66,8 +67,7 @@ console.log(iElement);
             });
 
 
-            iElement.bind('touchmove', function(inEvent) {
-              console.log(iElement[0].scrollTop);
+            bodyElement.bind('touchmove', function(inEvent) {
               if (draging) {
                 end = inEvent.touches[0].pageY;
                 inEvent.preventDefault();
@@ -76,8 +76,7 @@ console.log(iElement);
               }
             });
 
-            iElement.bind('touchend', function(inEvent) {
-              console.log('touch end!!!');
+            bodyElement.bind('touchend', function(inEvent) {
               if (draging) {
                 draging = false;
                 if (end - start >= offset) {
@@ -94,8 +93,8 @@ console.log(iElement);
 
             scope.$on('$destroy', function() {
               iElement.unbind('touchstart');
-              iElement.unbind('touchmove');
-              iElement.unbind('touchend');
+              bodyElement.unbind('touchmove');
+              bodyElement.unbind('touchend');
             });
 
             function setTranslition(time) {
