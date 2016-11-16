@@ -51,7 +51,7 @@
               });
 
               bodyEl.bind('touchmove', function(ev) {
-                isDragging= transElement.getBoundingClientRect().top>=0;
+                isDragging= transElement.getBoundingClientRect().top==0;
                 isDragging = isDragging && (historyY < ev.touches[0].pageY);
 
 
