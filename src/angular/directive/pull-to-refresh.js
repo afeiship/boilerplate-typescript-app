@@ -60,6 +60,7 @@
                   deltaTime = Date.now() - startTime;
 
                   dragOffset = deltaY / 4;
+                  console.log(dragOffset);
                   setTranslateY(dragOffset,0);
                   ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
                   if (deltaY > 100 && deltaTime > 400) {
