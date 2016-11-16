@@ -5,14 +5,10 @@
     treshold: 60,
     debounce: 400,
     text: {
-      pull: 'pull to refresh',
-      release: 'release to refresh',
-      loading: 'refreshing...'
-    },
-    icon: {
-      pull: 'fa fa-arrow-down',
-      release: 'fa fa-arrow-up',
-      loading: 'fa fa-refresh fa-spin'
+      pull: '下拉刷新',
+      release: '释放更新',
+      loading: '加载数据',
+      complete: '加载完成',
     }
   });
 

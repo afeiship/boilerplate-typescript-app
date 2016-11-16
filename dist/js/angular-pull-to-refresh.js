@@ -12,14 +12,10 @@
     treshold: 60,
     debounce: 400,
     text: {
-      pull: 'pull to refresh',
-      release: 'release to refresh',
-      loading: 'refreshing...'
-    },
-    icon: {
-      pull: 'fa fa-arrow-down',
-      release: 'fa fa-arrow-up',
-      loading: 'fa fa-refresh fa-spin'
+      pull: '下拉刷新',
+      release: '释放更新',
+      loading: '加载数据',
+      complete: '加载完成',
     }
   });
 
@@ -35,90 +31,82 @@
         scope: true,
         restrict: 'A',
         transclude: true,
-        template: '<div class="nx-widget-pull-to-refresh">' +
-          '<i ng-class="icon[status]"></i>&nbsp;' +
+        template: '<div class="nx-widget-pull-to-refresh-indecator">' +
           '<span ng-bind="text[status]"></span>' +
           '</div>' +
           '<div ng-transclude></div>',
         compile: function compile(tElement, tAttrs, transclude) {
+            return function postLink(scope, iElement, iAttrs) {
+              var config = angular.extend({}, nxPullToRefreshConfig, iAttrs);
 
-          return function postLink(scope, iElement, iAttrs) {
-            var lock, draging;
-            var start, end;
-            var config = angular.extend({}, nxPullToRefreshConfig, iAttrs);
-            var scrollElement = iElement.parent();
-            var ptrElement = window.ptr = iElement.children()[0];
-            var offset = config.treshold;
-            var callback = scope.$eval(iAttrs.pullToRefresh);
-            var bodyElement= angular.element(document.body);
+              var bodyEl = angular.element(document.body);
+              var scrollElement = iElement.parent();
+              var ptrElement = iElement.children()[0];
+              var transElement = ptrElement.nextElementSibling;
+              var startY, deltaY, dragOffset;
+              var startTime, deltaTime;
+              var shouldReload = false;
 
-console.log(iElement);
-            // Initialize isolated scope vars
-            scope.text = config.text;
-            scope.icon = config.icon;
-            scope.status = 'pull';
-            iElement.bind('touchstart', function(inEvent) {
-              if (iElement[0].scrollTop <= 0 && !lock) {
-                lock = true;
-                draging = true;
-                start = inEvent.touches[0].pageY;
-                setTranslition(0);
-              }
-            });
+              scope.text= config.text;
+              scope.status='pull';
+              iElement.addClass('nx-widget-pull-to-refresh-wrapper');
+              angular.element(transElement).addClass('nx-widget-pull-to-refresh-scroller')
 
+              var setStatus = function(status) {
+                scope.$apply(function() {
+                  scope.status = status;
+                  shouldReload=status==='release';
+                });
+              };
 
-            bodyElement.bind('touchmove', function(inEvent) {
-              if (draging) {
-                end = inEvent.touches[0].pageY;
-                inEvent.preventDefault();
-                setTranslition(0);
-                translate(end - start - offset);
-              }
-            });
+              var setTranslateY=function(inOffset,inInterval) {
+                transElement.style.WebkitTransform = 'translate3d(0,' + inOffset + 'px,0)';
+                transElement.style.WebkitTransition = 'all '+inInterval+'s';
+              };
 
-            bodyElement.bind('touchend', function(inEvent) {
-              if (draging) {
-                draging = false;
-                if (end - start >= offset) {
-                  setTranslition(1);
-                  translate(0);
-                  if (typeof callback == "function") {
-                    callback();
+              scrollElement.bind('touchstart', function(ev) {
+                startY = ev.touches[0].pageY;
+                startTime = Date.now();
+              });
+
+              bodyEl.bind('touchmove', function(ev) {
+                deltaY = ev.touches[0].pageY - startY;
+                deltaTime = Date.now() - startTime;
+
+                dragOffset = deltaY / 3;
+                setTranslateY(dragOffset,0);
+                ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
+
+                
+                console.log(scope.status,shouldReload);
+                if (deltaY > 100 && deltaTime > 400) {
+                  if (deltaY - dragOffset > 60) {
+                    setStatus('release');
                   }
-                } else {
-                  reset();
                 }
-              }
-            });
-
-            scope.$on('$destroy', function() {
-              iElement.unbind('touchstart');
-              bodyElement.unbind('touchmove');
-              bodyElement.unbind('touchend');
-            });
-
-            function setTranslition(time) {
-              iElement.css({
-                "-webkit-transition": "all " + time + "s",
-                "transition": "all " + time + "s"
               });
-            }
 
-            function reset() {
-              translate(0 - offset);
-              lock = false;
-            }
-
-            function translate(inDiff) {
-              iElement.css({
-                "-webkit-transform": "translate(0," + inDiff + "px)",
-                "transform": "translate(0," + inDiff + "px)"
+              bodyEl.bind('touchend', function(ev) {
+                console.log(shouldReload);
+                if (shouldReload) {
+                  shouldReload = false;
+                  setStatus('loading');
+                  console.log('loading...');
+                  // var start = +new Date();
+                  $q.when(scope.$eval(iAttrs.nxPullToRefresh)).then(function() {
+                    //setStatus('complete');
+                    scope.status='complete';
+                  },100);
+                }
               });
-            }
 
-
-          };
-        }
+              scope.$on('$destroy', function() {
+                scrollElement.unbind('touchstart');
+                bodyEl.unbind('touchmove');
+                bodyEl.unbind('touchend');
+              });
+            };
+          } //end compile
       };
     });
 })();

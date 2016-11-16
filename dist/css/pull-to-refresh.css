@@ -1,18 +1,20 @@
 /**pull-to-refresh Start**/
-.nx-widget-pull-to-refresh {
+.nx-widget-pull-to-refresh-wrapper {
   position: relative;
-  display: block;
-  box-sizing: border-box;
-  margin: -40px auto 0;
-  padding: 0;
-  width: 100%;
+}
+
+.nx-widget-pull-to-refresh-scroller {
+  position: relative;
+  z-index: 1;
+}
+
+.nx-widget-pull-to-refresh-indecator {
+  z-index: 0;
   height: 40px;
-  border-bottom: 1px dashed #ccc;
-  text-align: center;
   line-height: 40px;
-  transition-duration: 400ms;
-  transition-property: margin;
-  transform: translateZ(0px);
+  text-align: center;
+  position: fixed;
+  width: 100%;
 }
 
 /**pull-to-refresh  End**/
