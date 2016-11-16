@@ -25,6 +25,7 @@
               var shouldReload = false;
               var historyY;
               var isDragging = false;
+              var wrapperTop = iElement[0].getBoundingClientRect().top;
 
               scope.text= config.text;
               scope.status='pull';
@@ -50,8 +51,10 @@
               });
 
               bodyEl.bind('touchmove', function(ev) {
+                isDragging= transElement.getBoundingClientRect().top>=0;
+                isDragging = isDragging && (historyY < ev.touches[0].pageY);
 
-                isDragging = historyY < ev.touches[0].pageY;
+
                 if(isDragging){
                   ev.preventDefault();
                   deltaY = ev.touches[0].pageY - startY;
