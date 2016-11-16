@@ -51,16 +51,15 @@
               });
 
               bodyEl.bind('touchmove', function(ev) {
-                isDragging= transElement.getBoundingClientRect().top==0;
+                isDragging= transElement.getBoundingClientRect().top>=0;
                 isDragging = isDragging && (historyY < ev.touches[0].pageY);
-
 
                 if(isDragging){
                   ev.preventDefault();
                   deltaY = ev.touches[0].pageY - startY;
                   deltaTime = Date.now() - startTime;
 
-                  dragOffset = deltaY / 3;
+                  dragOffset = deltaY / 4;
                   setTranslateY(dragOffset,0);
                   ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
                   if (deltaY > 100 && deltaTime > 400) {
