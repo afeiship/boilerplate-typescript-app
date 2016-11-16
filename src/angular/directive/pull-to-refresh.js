@@ -70,6 +70,7 @@
                   $q.when(scope.$eval(iAttrs.nxPullToRefresh)).then(function() {
                     //setStatus('complete');
                     scope.status='complete';
+                    setTranslateY(40,0.3);
                   },100);
                 }
               });
