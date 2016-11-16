@@ -65,12 +65,9 @@
                 if (shouldReload) {
                   shouldReload = false;
                   setStatus('loading');
-                  console.log('loading...');
-                  // var start = +new Date();
+                  setTranslateY(40,0.3);
                   $q.when(scope.$eval(iAttrs.nxPullToRefresh)).then(function() {
-                    //setStatus('complete');
                     scope.status='complete';
-                    setTranslateY(40,0.3);
                   },100);
                 }
               });
