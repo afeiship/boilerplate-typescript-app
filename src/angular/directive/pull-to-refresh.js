@@ -44,9 +44,11 @@
               scrollElement.bind('touchstart', function(ev) {
                 startY = ev.touches[0].pageY;
                 startTime = Date.now();
+                setStatus('pull');
               });
 
               bodyEl.bind('touchmove', function(ev) {
+                ev.preventDefault();
                 deltaY = ev.touches[0].pageY - startY;
                 deltaTime = Date.now() - startTime;
 
@@ -65,10 +67,21 @@
                 if (shouldReload) {
                   shouldReload = false;
                   setStatus('loading');
+                  ptrElement.style.WebkitTransform = 'translate3d(0,0,0)';
+                  ptrElement.style.WebkitTransition = 'all 0.3s';
                   setTranslateY(40,0.3);
                   $q.when(scope.$eval(iAttrs.nxPullToRefresh)).then(function() {
-                    scope.status='complete';
-                  },100);
+                    $timeout(function(){
+                      scope.status='complete';
+                      setTranslateY(0,0.3);
+                      ptrElement.style.WebkitTransform = '';
+                      ptrElement.style.WebkitTransition = '';
+                    },1000);
+                  });
+                }else{
+                  setTranslateY(0,0.3);
+                  ptrElement.style.WebkitTransform = '';
+                  ptrElement.style.WebkitTransition = '';
                 }
               });
 
