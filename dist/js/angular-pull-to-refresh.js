@@ -46,6 +46,9 @@
               var startY, deltaY, dragOffset;
               var startTime, deltaTime;
               var shouldReload = false;
+              var isDragging = false;
+              var historyY=0;
+
 
               scope.text= config.text;
               scope.status='pull';
@@ -71,7 +74,10 @@
               });
 
               bodyEl.bind('touchmove', function(ev) {
-                ev.preventDefault();
+                // ev.preventDefault();
+
+                isDragging= ev.touches[0].pageY<historyY;
+                console.log(isDragging);
                 deltaY = ev.touches[0].pageY - startY;
                 deltaTime = Date.now() - startTime;
 
@@ -83,6 +89,8 @@
                     setStatus('release');
                   }
                 }
+
+                historyY=ev.touches[0].pageY;
               });
 
               bodyEl.bind('touchend', function(ev) {
