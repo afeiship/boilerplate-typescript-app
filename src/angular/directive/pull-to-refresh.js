@@ -30,7 +30,7 @@
               scope.text= config.text;
               scope.status='pull';
               iElement.addClass('nx-widget-pull-to-refresh-wrapper');
-              angular.element(transElement).addClass('nx-widget-pull-to-refresh-scroller')
+              angular.element(transElement).addClass('nx-widget-pull-to-refresh-scroller');
 
               var setStatus = function(status) {
                 scope.$apply(function() {
@@ -56,7 +56,7 @@
 
                 if(isDragging){
                   ev.preventDefault();
-                  deltaY = ev.touches[0].pageY - startY;
+                  deltaY = ev.touches[0].pageY - startY + transElement.getBoundingClientRect().top;
                   deltaTime = Date.now() - startTime;
 
                   dragOffset = deltaY / 4;
