@@ -46,9 +46,8 @@
               var startY, deltaY, dragOffset;
               var startTime, deltaTime;
               var shouldReload = false;
+              var historyY;
               var isDragging = false;
-              var historyY=0;
-
 
               scope.text= config.text;
               scope.status='pull';
@@ -74,19 +73,20 @@
               });
 
               bodyEl.bind('touchmove', function(ev) {
-                // ev.preventDefault();
 
-                isDragging= ev.touches[0].pageY<historyY;
-                console.log(isDragging);
-                deltaY = ev.touches[0].pageY - startY;
-                deltaTime = Date.now() - startTime;
+                isDragging = historyY < ev.touches[0].pageY;
+                if(isDragging){
+                  ev.preventDefault();
+                  deltaY = ev.touches[0].pageY - startY;
+                  deltaTime = Date.now() - startTime;
 
-                dragOffset = deltaY / 3;
-                setTranslateY(dragOffset,0);
-                ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
-                if (deltaY > 100 && deltaTime > 400) {
-                  if (deltaY - dragOffset > 60) {
-                    setStatus('release');
+                  dragOffset = deltaY / 3;
+                  setTranslateY(dragOffset,0);
+                  ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
+                  if (deltaY > 100 && deltaTime > 400) {
+                    if (deltaY - dragOffset > 60) {
+                      setStatus('release');
+                    }
                   }
                 }
 

@@ -23,6 +23,8 @@
               var startY, deltaY, dragOffset;
               var startTime, deltaTime;
               var shouldReload = false;
+              var historyY;
+              var isDragging = false;
 
               scope.text= config.text;
               scope.status='pull';
@@ -48,18 +50,24 @@
               });
 
               bodyEl.bind('touchmove', function(ev) {
-                ev.preventDefault();
-                deltaY = ev.touches[0].pageY - startY;
-                deltaTime = Date.now() - startTime;
 
-                dragOffset = deltaY / 3;
-                setTranslateY(dragOffset,0);
-                ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
-                if (deltaY > 100 && deltaTime > 400) {
-                  if (deltaY - dragOffset > 60) {
-                    setStatus('release');
+                isDragging = historyY < ev.touches[0].pageY;
+                if(isDragging){
+                  ev.preventDefault();
+                  deltaY = ev.touches[0].pageY - startY;
+                  deltaTime = Date.now() - startTime;
+
+                  dragOffset = deltaY / 3;
+                  setTranslateY(dragOffset,0);
+                  ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
+                  if (deltaY > 100 && deltaTime > 400) {
+                    if (deltaY - dragOffset > 60) {
+                      setStatus('release');
+                    }
                   }
                 }
+
+                historyY=ev.touches[0].pageY;
               });
 
               bodyEl.bind('touchend', function(ev) {
