@@ -80,6 +80,7 @@
                 if(isDragging){
                   ev.preventDefault();
                   deltaY = ev.touches[0].pageY - startY;
+                  console.log(deltaY);
                   deltaTime = Date.now() - startTime;
 
                   dragOffset = deltaY / 4;
