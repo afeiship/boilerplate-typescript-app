@@ -48,7 +48,7 @@
               var shouldReload = false;
               var historyY;
               var isDragging = false;
-              var wrapperTop = iElement[0].getBoundingClientRect().top;
+              var scrollTop=0;
 
               scope.text= config.text;
               scope.status='pull';
@@ -74,15 +74,17 @@
               });
 
               bodyEl.bind('touchmove', function(ev) {
+                console.log('move....');
+                // ev.preventDefault();
                 isDragging= transElement.getBoundingClientRect().top>=0;
                 isDragging = isDragging && (historyY < ev.touches[0].pageY);
-
                 if(isDragging){
                   ev.preventDefault();
-                  deltaY = ev.touches[0].pageY - startY + transElement.getBoundingClientRect().top;
+                  deltaY = ev.touches[0].pageY - startY;
                   deltaTime = Date.now() - startTime;
 
-                  dragOffset = deltaY / 4;
+                  dragOffset = deltaY / 3;
+                  console.log(dragOffset);
                   setTranslateY(dragOffset,0);
                   ptrElement.style.WebkitTransform = 'translate3d(0,' + (dragOffset/2-20) + 'px,0)';
                   if (deltaY > 100 && deltaTime > 400) {
@@ -95,8 +97,9 @@
                 historyY=ev.touches[0].pageY;
               });
 
+
+
               bodyEl.bind('touchend', function(ev) {
-                console.log(shouldReload);
                 if (shouldReload) {
                   shouldReload = false;
                   setStatus('loading');

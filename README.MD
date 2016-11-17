@@ -10,3 +10,4 @@ CSS3 Pull-to-Refresh directive for AngularJS
 
 ##demo:
 + https://github.com/afeiship/angular-pull-to-refresh/blob/master/test/test.html
++ https://www.zhihu.com/question/22256539
