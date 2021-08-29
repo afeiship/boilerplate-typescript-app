@@ -1,13 +1,12 @@
-#angular-pull-to-refresh
-CSS3 Pull-to-Refresh directive for AngularJS
+# boilerplate-typescript-app
+> boilerplate-typescript-app-description
 
-##usage:
-+ bower install `afeiship/angular-pull-to-refresh --save`
+## get-started
+```shell
+npm run start -- --hello=world
+```
 
-## resources:
-+ https://github.com/mgcrea/angular-pull-to-refresh
-
-
-##demo:
-+ https://github.com/afeiship/angular-pull-to-refresh/blob/master/test/test.html
-+ https://www.zhihu.com/question/22256539
+```conf
+{ hello: 'world' } { name: 'ts-app', version: '1.0.0' }
+hello app: 🥬 1.0.9
+```
