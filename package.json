@@ -30,9 +30,9 @@
     "access": "<%= registry.access %>",
     "registry": "<%= registry.publish %>"
   },
-  "boilerplate": "@scope/boilerplate-typescript-app",
+  "boilerplate": "boilerplate-typescript-app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/afeiship/@scope/boilerplate-typescript-app"
+    "url": "https://github.com/afeiship/boilerplate-typescript-app.git"
   }
 }
