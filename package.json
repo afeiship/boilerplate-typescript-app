@@ -1,6 +1,6 @@
 {
   "name": "@jswork/capwords",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Capwords in js like python stirng.capwords.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -39,5 +39,10 @@
     "registry": "https://registry.npmjs.org"
   },
   "boilerplate": "generator-typescript",
-  "homepage": "https://js.work"
+  "homepage": "https://js.work",
+  "keywords": [
+    "lang",
+    "string",
+    "capwords"
+  ]
 }
