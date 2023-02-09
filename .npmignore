@@ -7,14 +7,14 @@ __tests__
 src
 build
 gulpfile.js
-rollup.config.js
 
 .editorconfig
 .prettierrc
-
-# vscode
-.vscode
-.history
-.github
-api
-docs
+.prettierignore
+.release-it.json
+typedoc.js
+tsconfig.json
+jest.config.js
+babel.config.js
+yarn-error.log
+yarn.lock
