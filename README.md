@@ -15,7 +15,8 @@ npm install @jswork/capwords
 ```js
 import capwords from '@jswork/capwords';
 
-// usage goes here.
+capwords('freeCodeCamp is an awesome resource');
+// => "Freecodecamp Is An Awesome Resource"
 ```
 
 ## license
